@@ -25,7 +25,7 @@ def home():
 
 @app.route("/predict", methods=['POST'])
 def predict():
-    
+    """Performs an sklearn prediction
         
         input looks like:
         {
@@ -51,8 +51,8 @@ def predict():
         result looks like:
         { "prediction": [ <val> ] }
         
-        
-
+        """
+    
     # Logging the input payload
     json_payload = request.json
     LOG.info(f"JSON payload: \n{json_payload}")
@@ -63,6 +63,7 @@ def predict():
     # get an output prediction from the pretrained model, clf
     prediction = list(clf.predict(scaled_payload))
     # TO DO:  Log the output prediction value
+    LOG.info(f"Output prediction: {prediction}")
     return jsonify({'prediction': prediction})
 
 if __name__ == "__main__":
